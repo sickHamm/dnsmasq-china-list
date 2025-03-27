@@ -15,5 +15,5 @@ jobs:
     - uses: actions/checkout@v4
 
       - name:  smartdns
-      run: make smartdns-domain-rules
+      run: make raw
 
