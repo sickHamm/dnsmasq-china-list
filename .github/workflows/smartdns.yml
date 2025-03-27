@@ -13,10 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      
-      - name:  clean
-      run: make clean
- 
-      - name:  smartdns
-      run: make raw
 
+    - name: clean
+      run: make clean
+
+    - name: raw
+      run: make raw
