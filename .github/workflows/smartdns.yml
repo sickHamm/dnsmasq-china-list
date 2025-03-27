@@ -19,3 +19,9 @@ jobs:
 
     - name: raw
       run: make raw
+    
+    - name: Create Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: converted-files
+        path: converted
