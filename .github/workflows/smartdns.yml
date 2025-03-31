@@ -1,0 +1,37 @@
+name: SmartDNS
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # 每天执行
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Make Clean
+      run: make clean
+
+    - name: Make Raw
+      run: | 
+        make raw
+        mv *.raw.txt smartdns/ 
+        
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        current_time=$(date +'%Y-%m-%d %H:%M:%S')
+        git add smartdns/
+        git commit -m "Update SmartDNS  - $current_time"
+       
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
