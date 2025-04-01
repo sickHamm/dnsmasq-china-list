@@ -20,11 +20,14 @@ jobs:
     - name: Make Raw
       run: | 
         make raw
-        mv *.raw.txt smartdns/ 
+        mv *.raw.txt smartdns/
+    
+    - name: Make Raw
+      run: echo "test" > smartdns/hello
         
     - name: Commit files
       run: |
-        if ! git diff --exit-code smartdns/ ; then
+        if ! git diff --quiet smartdns/ ; then
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           current_time=$(date +'%Y-%m-%d %H:%M:%S')
