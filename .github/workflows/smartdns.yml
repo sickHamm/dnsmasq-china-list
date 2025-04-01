@@ -24,12 +24,15 @@ jobs:
         
     - name: Commit files
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        current_time=$(date +'%Y-%m-%d %H:%M:%S')
-        git add smartdns/
-        git commit -m "Update SmartDNS  - $current_time"
-       
+        if git diff --exit-code smartdns/ ; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          current_time=$(date +'%Y-%m-%d %H:%M:%S')
+          git add smartdns/
+          git commit -m "Update SmartDNS  - $current_time"
+        else
+          echo "No changes to commit."
+        fi
     - name: Push changes
       uses: ad-m/github-push-action@v0.6.0
       with:
