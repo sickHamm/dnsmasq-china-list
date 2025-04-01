@@ -21,9 +21,6 @@ jobs:
       run: | 
         make raw
         mv *.raw.txt smartdns/
-    
-    - name: Make Raw
-      run: echo "test" > smartdns/hello
         
     - name: Commit files
       run: |
